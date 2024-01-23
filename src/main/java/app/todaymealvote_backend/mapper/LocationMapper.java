@@ -15,8 +15,13 @@ public interface LocationMapper {
     @Select("select * from location")
     public List<LocationDTO> findAll();
 
+    @Select("select * from location where id=#{id}")
+    public List<LocationDTO> findOne(String id);
+
     @Select("select COUNT(*) from location where id=#{id}")
     public int idFindAll(String id);
+
+
 }
 
 //@Select("<script>" +

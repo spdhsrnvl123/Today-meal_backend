@@ -19,6 +19,11 @@ public class LocationDAO {
         return locationMapper.findAll();
     }
 
+    // 한 장소 조회
+    public List<LocationDTO> findOne(String id){
+        return locationMapper.findOne(id);
+    }
+
     //id값 조회
     public int idFindAll(String id){
         return locationMapper.idFindAll(id);

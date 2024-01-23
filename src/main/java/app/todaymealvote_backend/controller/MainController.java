@@ -28,6 +28,13 @@ public class MainController {
         return locationService.findAll();
     }
 
+    //각 장소 조회
+    @GetMapping("/location/{id}")
+    public Object locationFindEach(@PathVariable String id){
+        System.out.println(locationService.findOne(id));
+        return locationService.findOne(id);
+    }
+
     @GetMapping("/user")
     public UserDTO userFindAll() {
         return uService.userFindAll();

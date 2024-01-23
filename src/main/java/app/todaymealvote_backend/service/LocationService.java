@@ -30,9 +30,14 @@ public class LocationService {
     @Autowired
     RegisterDTO registerDTO;
 
-    // 후기 조회
+    // 장소 조회
     public Object findAll() {
         return locationDAO.findAll();
+    }
+
+    //후기 각 장소 조회
+    public Object findOne(String id){
+        return locationDAO.findOne(id);
     }
 
     //장소저장
