@@ -1,7 +1,9 @@
 package app.todaymealvote_backend.service;
 
 import app.todaymealvote_backend.dao.LocationDAO;
+import app.todaymealvote_backend.dao.MenuDAO;
 import app.todaymealvote_backend.dto.LocationDTO;
+import app.todaymealvote_backend.dto.MenuDTO;
 import app.todaymealvote_backend.dto.RegisterDTO;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -29,6 +31,10 @@ public class LocationService {
     LocationDAO locationDAO;
     @Autowired
     RegisterDTO registerDTO;
+    @Autowired
+    MenuDTO menuDTO;
+    @Autowired
+    MenuDAO menuDAO;
 
     // 장소 조회
     public Object findAll() {
@@ -40,7 +46,7 @@ public class LocationService {
         return locationDAO.findOne(id);
     }
 
-    //장소저장
+    //장소등록
     public Object save(String id) throws JsonProcessingException { //JsonProcessingException 기능 알아보기
 
         int idExist = locationDAO.idFindAll(id);
@@ -66,6 +72,7 @@ public class LocationService {
             ObjectMapper objectMapper = new ObjectMapper();
             // JSON데이터 -> 자바오브젝트로 변환
             JsonNode rootNode = objectMapper.readTree(jsonResponse);
+
             //1deps - basicInfo 접근
             JsonNode basicInfoNode = rootNode.path("basicInfo");
 
@@ -111,14 +118,37 @@ public class LocationService {
             locationDTO.setAddr(newaddrfullname + " " + newaddrfull + " (우)" + bsizonno);
             locationDTO.setPhonenum(phonenum);
             locationDTO.setCategory(catename);
+
             locationDAO.save(locationDTO);
 
+            // 메뉴 등록
+            //1deps - MenuInfoNode 접근
+            JsonNode MenuInfoNode = rootNode.path("menuInfo");
+            System.out.println(MenuInfoNode);
+            JsonNode menuList = MenuInfoNode.path("menuList");
+            String menucount = MenuInfoNode.path("menucount").asText();
+
+            int count = Integer.parseInt(menucount);
+
+            for(int i=0; i<count;i++){
+                JsonNode menuListIndex = menuList.get(i);
+                String menu = menuListIndex.path("menu").asText();
+                String price = menuListIndex.path("price").asText();
+                String desc = menuListIndex.path("desc").asText();
+
+
+                System.out.println(menu);
+                menuDTO.setMenu(menu);
+                menuDTO.setPrice(price);
+                menuDTO.setDescription(desc);
+                menuDTO.setLocation_id(id);
+                menuDAO.save(menuDTO);
+            }
+
             registerDTO.setStatus("등록이 완료되었습니다.");
-            System.out.println(registerDTO.getStatus());
             return registerDTO;
         }else {
             registerDTO.setStatus("중복된 장소입니다.");
-            System.out.println(registerDTO.getStatus());
             return registerDTO;
         }
     }
