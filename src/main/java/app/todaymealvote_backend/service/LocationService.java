@@ -9,17 +9,15 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cglib.core.Local;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import java.sql.Date;
-import java.text.SimpleDateFormat;
-import java.util.Locale;
+import java.time.LocalDate;
 
 
 @Service
@@ -151,5 +149,20 @@ public class LocationService {
             registerDTO.setStatus("중복된 장소입니다.");
             return registerDTO;
         }
+    }
+
+    //장소 삭제 요청값 DB삽입(날짜)
+    public Object del(String id){
+        LocalDate now = LocalDate.now();
+        String loading = "삭제대기";
+        return locationDAO.del(id,now,loading);
+    }
+
+
+    //장소 삭제 00:00 - 오늘 날짜가 아닌 update_date에선 state값 "등록취소"로 등록
+    @Scheduled(cron = "0 0 0 * * *")
+    public void scheduleDel(){
+        System.out.println("삭제완료");
+        locationDAO.scheduleDel();
     }
 }

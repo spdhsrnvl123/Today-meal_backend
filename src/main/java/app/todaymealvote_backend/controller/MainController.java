@@ -33,6 +33,12 @@ public class MainController {
         return locationService.findAll();
     }
 
+    //장소삭제
+    @GetMapping("/location/delete/{id}")
+    public Object del(@PathVariable String id){
+        return locationService.del(id);
+    }
+
     //메뉴조회
     @GetMapping("/menu/{id}")
     public Object menuFindAll(@PathVariable String id){ return menuService.menuFindAll(id); }
@@ -44,6 +50,7 @@ public class MainController {
         return locationService.findOne(id);
     }
 
+    //유저 정보 조회
     @GetMapping("/user")
     public UserDTO userFindAll() {
         return uService.userFindAll();
