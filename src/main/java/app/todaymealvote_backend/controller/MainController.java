@@ -14,29 +14,39 @@ import app.todaymealvote_backend.service.UserService;
 public class MainController {
     @Autowired
     UserService uService;
-
     @Autowired
     LocationService locationService;
-
     @Autowired
     MenuService menuService;
 
-    //등록과정
+    //장소등록
     @PostMapping("/register")
     public Object register(@RequestBody String id) throws JsonProcessingException {
         return locationService.save(id);
     }
 
-    //장소조회
+    //장소조회 - 등록한 장소 조회
     @GetMapping("/location")
     public Object locationFindAll(){
         return locationService.findAll();
+    }
+
+    //장소조회 - 삭제대기 장소 조회
+    @GetMapping("/loading")
+    public Object loadingLocation(){
+        return locationService.loadingLocation();
     }
 
     //장소삭제
     @GetMapping("/location/delete/{id}")
     public Object del(@PathVariable String id){
         return locationService.del(id);
+    }
+
+    //장소삭제 취소
+    @GetMapping("/loading/cancel/{id}")
+    public Object loadingCancel(@PathVariable String id){
+        return locationService.loadingCancel(id);
     }
 
     //메뉴조회

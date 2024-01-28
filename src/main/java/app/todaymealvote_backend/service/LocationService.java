@@ -34,9 +34,19 @@ public class LocationService {
     @Autowired
     MenuDAO menuDAO;
 
-    // 장소 조회
+    //장소조회 - 등록한 장소 조회
     public Object findAll() {
         return locationDAO.findAll();
+    }
+
+    //장소조회 - 삭제대기 장소 조회
+    public Object loadingLocation(){
+        return locationDAO.loadingLocation();
+    }
+
+    //삭제대기 취소
+    public Object loadingCancel(String id){
+        return locationDAO.loadingCancel(id);
     }
 
     //후기 각 장소 조회
