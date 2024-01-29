@@ -66,4 +66,10 @@ public class MainController {
         return uService.userFindAll();
     }
 
+    //유저 정보 조회
+    @GetMapping("/duplication/{id}")
+    public int duplicationFindAll(@PathVariable String id) {
+        return uService.duplicationFindAll(id);
+    }
+
 }

@@ -10,4 +10,7 @@ import java.util.List;
 public interface UserMapper {
     @Select("select * from user")
     public List<UserDTO>userFindAll();
+
+    @Select("select COUNT(*) from user where user_id=#{id}")
+    public int duplicationFindAll(String id);
 }

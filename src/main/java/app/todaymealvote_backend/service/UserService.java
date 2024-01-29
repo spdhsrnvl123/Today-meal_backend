@@ -8,9 +8,13 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class UserService {
-    @Autowired UserDAO uDao;
+    @Autowired UserDAO userDao;
     public UserDTO userFindAll(){
-        System.out.println(uDao.userFindAll());
+//        System.out.println(uDao.userFindAll());
         return null;
+    }
+
+    public int duplicationFindAll(String id){
+        return userDao.duplicationFindAll(id);
     }
 }

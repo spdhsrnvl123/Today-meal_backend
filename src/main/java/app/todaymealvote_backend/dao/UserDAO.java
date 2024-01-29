@@ -9,8 +9,13 @@ import java.util.List;
 
 @Repository
 public class UserDAO {
-    @Autowired UserMapper uMapper;
+    @Autowired UserMapper userMapper;
     public List<UserDTO> userFindAll(){
-        return uMapper.userFindAll();
+        return userMapper.userFindAll();
+    }
+
+    public int duplicationFindAll(String id){
+        System.out.println(id);
+        return userMapper.duplicationFindAll(id);
     }
 }
