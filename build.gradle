@@ -23,6 +23,7 @@ repositories {
 
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.springframework.boot:spring-boot-starter-security'
 	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:3.0.3'
 	implementation 'com.fasterxml.jackson.datatype:jackson-datatype-hibernate5'
 	compileOnly 'org.projectlombok:lombok'
@@ -31,7 +32,6 @@ dependencies {
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter-test:3.0.3'
-// https://mvnrepository.com/artifact/com.googlecode.json-simple/json-simple
 	implementation group: 'com.googlecode.json-simple', name: 'json-simple', version: '1.1'
 }
 

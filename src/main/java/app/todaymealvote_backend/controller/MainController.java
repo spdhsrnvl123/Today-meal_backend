@@ -26,7 +26,7 @@ public class MainController {
     }
 
     //장소조회 - 등록한 장소 조회
-    @GetMapping("/location")
+    @GetMapping("/location2")
     public Object locationFindAll(){
         return locationService.findAll();
     }
@@ -71,5 +71,7 @@ public class MainController {
     public int duplicationFindAll(@PathVariable String id) {
         return uService.duplicationFindAll(id);
     }
+
+    //가입
 
 }
