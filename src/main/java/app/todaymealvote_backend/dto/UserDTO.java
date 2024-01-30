@@ -8,8 +8,7 @@ import java.util.Date;
 @Data
 @Component
 public class UserDTO {
-    private String id;
+    private String user_id;
     private String name;
     private String password;
-    private Date created_data;
 }

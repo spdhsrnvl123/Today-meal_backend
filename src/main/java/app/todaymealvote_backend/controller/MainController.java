@@ -13,7 +13,7 @@ import app.todaymealvote_backend.service.UserService;
 @RestController
 public class MainController {
     @Autowired
-    UserService uService;
+    UserService userService;
     @Autowired
     LocationService locationService;
     @Autowired
@@ -63,13 +63,19 @@ public class MainController {
     //유저 정보 조회
     @GetMapping("/user")
     public UserDTO userFindAll() {
-        return uService.userFindAll();
+        return userService.userFindAll();
     }
 
     //유저 정보 조회
     @GetMapping("/duplication/{id}")
     public int duplicationFindAll(@PathVariable String id) {
-        return uService.duplicationFindAll(id);
+        return userService.duplicationFindAll(id);
+    }
+
+    //회원가입 로직
+    @PostMapping("/join")
+    public int join(@RequestBody UserDTO userDTO){
+        return userService.join(userDTO);
     }
 
 }
