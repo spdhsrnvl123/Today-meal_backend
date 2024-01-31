@@ -17,8 +17,13 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
         http
                 .authorizeHttpRequests((auth) -> auth
+//                        .requestMatchers("/join").permitAll()
+                        .requestMatchers("/location").hasRole("ADMIN")
                         .anyRequest().permitAll()
                 );
+
+        http
+                .formLogin((auth) -> auth.loginProcessingUrl("/loginProc").permitAll());
 
         http
                 .csrf((auth) -> auth.disable());

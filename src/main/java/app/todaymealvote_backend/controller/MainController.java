@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import app.todaymealvote_backend.service.UserService;
 
-@CrossOrigin("http://localhost:4200")
+@CrossOrigin("*")
 @RestController
 public class MainController {
     @Autowired
@@ -26,7 +26,7 @@ public class MainController {
     }
 
     //장소조회 - 등록한 장소 조회
-    @GetMapping("/location2")
+    @GetMapping("/location")
     public Object locationFindAll(){
         return locationService.findAll();
     }
@@ -77,7 +77,5 @@ public class MainController {
     public int join(@RequestBody UserDTO userDTO){
         return userService.join(userDTO);
     }
-
-    //가입
 
 }

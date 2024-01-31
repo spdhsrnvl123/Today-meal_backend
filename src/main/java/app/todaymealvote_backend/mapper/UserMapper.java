@@ -15,6 +15,9 @@ public interface UserMapper {
     @Select("select COUNT(*) from user where user_id=#{id}")
     public int duplicationFindAll(String id);
 
-    @Insert("insert into user(user_id, name, password) values(#{user_id},#{name},#{password})")
+    @Insert("insert into user(user_id, name, password, role) values(#{user_id},#{name},#{password},#{role})")
     public int join(UserDTO userDTO);
+
+    @Select("select * from user where user_id=#{id}")
+    public UserDTO userFindOne(String id);
 }

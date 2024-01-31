@@ -22,4 +22,8 @@ public class UserDAO {
     public int join(UserDTO userDTO){
         return userMapper.join(userDTO);
     }
+
+    public Object userFindOne(String id){
+        return userMapper.userFindOne(id);
+    }
 }
