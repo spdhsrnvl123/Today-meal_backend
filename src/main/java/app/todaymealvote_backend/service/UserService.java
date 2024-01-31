@@ -2,7 +2,6 @@ package app.todaymealvote_backend.service;
 
 import app.todaymealvote_backend.dao.UserDAO;
 import app.todaymealvote_backend.dto.UserDTO;
-import app.todaymealvote_backend.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,4 +16,10 @@ public class UserService {
     public int duplicationFindAll(String id){
         return userDao.duplicationFindAll(id);
     }
+
+    public int join(UserDTO userDTO){
+        return userDao.join(userDTO);
+    }
+
+
 }

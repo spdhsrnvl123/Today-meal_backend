@@ -18,4 +18,8 @@ public class UserDAO {
         System.out.println(id);
         return userMapper.duplicationFindAll(id);
     }
+
+    public int join(UserDTO userDTO){
+        return userMapper.join(userDTO);
+    }
 }
