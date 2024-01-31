@@ -1,6 +1,7 @@
 package app.todaymealvote_backend.dto;
 
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.ArrayList;
@@ -21,16 +22,11 @@ public class CustomUserDetails implements UserDetails {
 
         Collection<GrantedAuthority> collection = new ArrayList<>();
 
-        collection.add(new GrantedAuthority() {
+        collection.add(new SimpleGrantedAuthority(userData.getRole()));
 
-            @Override
-            public String getAuthority() {
+        System.out.println(collection);
 
-                return userData.getRole();
-            }
-        });
-
-        return null;
+        return collection;
     }
 
     @Override
