@@ -16,24 +16,25 @@ public class CustomUserDetailsService implements UserDetailsService {
     @Autowired
     UserDAO userDAO;
     @Autowired
-    private BCryptPasswordEncoder passwordEncoder;
+    BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-        System.out.println(username);
-
-        UserDTO userData = (UserDTO) userDAO.userFindOne(username);
+        UserDTO userData = userDAO.infoId(username);
 
 
         if(userData != null){
-            System.out.println(userData);
+            // 비밀번호 암호화
+            if (!userData.getPassword().startsWith("$2a$")) {
+                String encryptedPassword = bCryptPasswordEncoder.encode(userData.getPassword());
+                userData.setPassword(encryptedPassword);
+            }
+
             return new CustomUserDetails(userData);
         }
 
-        throw new UsernameNotFoundException("User not found with username: " + username);
-    }
-    public boolean matchPassword(String rawPassword, String encodedPassword) {
-        return passwordEncoder.matches(rawPassword, encodedPassword);
+        return null;
+
     }
 }

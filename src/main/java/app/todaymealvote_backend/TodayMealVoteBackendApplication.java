@@ -7,7 +7,6 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 
 @EnableScheduling
 @SpringBootApplication
-@ComponentScan(basePackages = "app.todaymealvote_backend")
 public class TodayMealVoteBackendApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(TodayMealVoteBackendApplication.class, args);

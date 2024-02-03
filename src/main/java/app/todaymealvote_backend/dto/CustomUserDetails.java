@@ -1,7 +1,6 @@
 package app.todaymealvote_backend.dto;
 
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.ArrayList;
@@ -9,34 +8,37 @@ import java.util.Collection;
 
 public class CustomUserDetails implements UserDetails {
 
-    private UserDTO userData;
+    private final UserDTO userDTO;
 
-    public CustomUserDetails(UserDTO userData){
-        this.userData = userData;
+    public CustomUserDetails(UserDTO userDTO){
+        System.out.println(userDTO);
+        this.userDTO = userDTO;
     }
 
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        //사용자 권한에 대해서 리턴해주는 메소드이다. - 즉 Role값을 리턴하는 메소드이다.
-
         Collection<GrantedAuthority> collection = new ArrayList<>();
+        collection.add(new GrantedAuthority() {
 
-        collection.add(new SimpleGrantedAuthority(userData.getRole()));
-
-        System.out.println(collection);
+            @Override
+            public String getAuthority() {
+                return userDTO.getRole();
+            }
+        });
 
         return collection;
     }
 
     @Override
     public String getPassword() {
-        return userData.getPassword();
+        System.out.println(userDTO.getPassword());
+        return userDTO.getPassword();
     }
 
     @Override
     public String getUsername() {
-        return userData.getUser_id();
+        return userDTO.getUser_id();
     }
 
     @Override

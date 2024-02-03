@@ -1,7 +1,6 @@
 package app.todaymealvote_backend.dto;
 
 import lombok.Data;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
@@ -16,8 +15,4 @@ public class UserDTO {
     private String state;
     private String role;
 
-    public void setPassword(String plainPassword) {
-        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        this.password = passwordEncoder.encode(plainPassword);
-    }
 }

@@ -77,10 +77,10 @@ public class MainController {
         return userService.duplicationFindAll(id);
     }
 
-    //회원가입 로직
-    @PostMapping("/join")
-    public int join(@RequestBody UserDTO userDTO){
-        return userService.join(userDTO);
-    }
+//    //회원가입 로직
+//    @PostMapping("/join")
+//    public int join(@RequestBody UserDTO userDTO){
+//        return userService.join(userDTO);
+//    }
 
 }
