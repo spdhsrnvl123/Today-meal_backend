@@ -31,15 +31,25 @@ public class JWTUtil {
         return Jwts.parser().verifyWith(secretKey).build().parseSignedClaims(token).getPayload().getExpiration().before(new Date());
     }
 
-    public String createJwt(String username, String role, Long expiredMs) {
+//    public String createJwt(String username, String role, Long expiredMs) {
+//
+//        return Jwts.builder()
+//                .claim("username", username)
+//                .claim("role", role)
+//                .issuedAt(new Date(System.currentTimeMillis()))
+//                .expiration(new Date(System.currentTimeMillis() + expiredMs))
+//                .signWith(secretKey)
+//                .compact();
+//    }
+public String createJwt(String user_id, String role, Long expiredMs) {
+    return Jwts.builder()
+            .claim("user_id", user_id)
+            .claim("role", role)
+            .issuedAt(new Date(System.currentTimeMillis()))
+            .expiration(new Date(System.currentTimeMillis() + expiredMs))
+            .signWith(secretKey)
+            .compact();
+}
 
-        return Jwts.builder()
-                .claim("username", username)
-                .claim("role", role)
-                .issuedAt(new Date(System.currentTimeMillis()))
-                .expiration(new Date(System.currentTimeMillis() + expiredMs))
-                .signWith(secretKey)
-                .compact();
-    }
 
 }

@@ -1,5 +1,6 @@
 package app.todaymealvote_backend.config;
 
+import app.todaymealvote_backend.jwt.JWTFilter;
 import app.todaymealvote_backend.jwt.JWTUtil;
 import app.todaymealvote_backend.jwt.LoginFilter;
 import org.springframework.context.annotation.Bean;
@@ -54,8 +55,11 @@ public class SecurityConfig {
         http
                 .authorizeHttpRequests((auth) -> auth
                         .requestMatchers("/login", "/", "/join", "/user").permitAll()
-                        .requestMatchers("/admin").hasRole("ADMIN")
+                        .requestMatchers("/admin").hasRole("USER")
                         .anyRequest().authenticated());
+        //JWTFilter 등록
+        http
+                .addFilterBefore(new JWTFilter(jwtUtil), LoginFilter.class);
 
         //필터 추가 LoginFilter()는 인자를 받음 (AuthenticationManager() 메소드에 authenticationConfiguration 객체를 넣어야 함) 따라서 등록 필요
         http
