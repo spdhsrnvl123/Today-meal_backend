@@ -12,6 +12,8 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Collection;
 import java.util.Iterator;
 
@@ -35,8 +37,10 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
         String password = obtainPassword(request);
 //        String password = request.getParameter("password");
 
+        System.out.println("------------------------");
         System.out.println(user_id);
         System.out.println(password);
+        System.out.println("------------------------");
 
         //스프링 시큐리티에서 username과 password를 검증하기 위해서는 token에 담아야 함
         UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(user_id, password, null);
@@ -64,6 +68,14 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
 //        String token = jwtUtil.createJwt(username, role, 60*60*10L);
 
         response.addHeader("Authorization", "Bearer " + token);
+
+        String jsonToken = "{\"accessToken\" : \"" + token + "\"}";
+        try {
+            PrintWriter writer = response.getWriter();
+            writer.write(jsonToken);
+        }catch (IOException e){
+            System.out.println(e);
+        }
     }
 
     //로그인 실패시 실행하는 메소드

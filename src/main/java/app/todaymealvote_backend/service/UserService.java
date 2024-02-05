@@ -18,7 +18,7 @@ public class UserService {
     }
 
     //가입
-    public void joinProcess(UserDTO userDTO){
+    public int joinProcess(UserDTO userDTO){
         String username = userDTO.getUser_id();
         String password = userDTO.getPassword();
 
@@ -33,6 +33,6 @@ public class UserService {
 //        userDTO.setPassword(bCryptPasswordEncoder.encode(password));
         userDTO.setRole("ROLE_USER");
 
-        userDao.join(userDTO);
+        return userDao.join(userDTO);
     }
 }

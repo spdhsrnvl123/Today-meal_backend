@@ -71,16 +71,17 @@ public class MainController {
         return locationService.findOne(id);
     }
 
-    //유저 정보 조회
+    //유저 정보 조회 - 중복검사
     @GetMapping("/duplication/{id}")
     public int duplicationFindAll(@PathVariable String id) {
         return userService.duplicationFindAll(id);
     }
 
-//    //회원가입 로직
-//    @PostMapping("/join")
-//    public int join(@RequestBody UserDTO userDTO){
-//        return userService.join(userDTO);
-//    }
+    //회원가입
+    @PostMapping("/join")
+    public int join(@RequestBody UserDTO userDTO){
+
+        return userService.joinProcess(userDTO);
+    }
 
 }
