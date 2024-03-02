@@ -132,7 +132,6 @@ public class LocationService {
             // 메뉴 등록
             //1deps - MenuInfoNode 접근
             JsonNode MenuInfoNode = rootNode.path("menuInfo");
-            System.out.println(MenuInfoNode);
             JsonNode menuList = MenuInfoNode.path("menuList");
             String menucount = MenuInfoNode.path("menucount").asText();
 
@@ -144,8 +143,6 @@ public class LocationService {
                 String price = menuListIndex.path("price").asText();
                 String desc = menuListIndex.path("desc").asText();
 
-
-                System.out.println(menu);
                 menuDTO.setMenu(menu);
                 menuDTO.setPrice(price);
                 menuDTO.setDescription(desc);
@@ -174,5 +171,9 @@ public class LocationService {
     public void scheduleDel(){
         System.out.println("삭제완료");
         locationDAO.scheduleDel();
+    }
+
+    public Object getLocationVoteCount() {
+        return locationDAO.getLocationVoteCount();
     }
 }

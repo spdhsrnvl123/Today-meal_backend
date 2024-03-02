@@ -56,6 +56,12 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
         CustomUserDetails customUserDetails = (CustomUserDetails) authentication.getPrincipal();
 
         String username = customUserDetails.getUsername();
+        String realName = customUserDetails.getName(); // 사용자 이름
+
+        System.out.println("------------------------");
+        System.out.println(username);
+        System.out.println(realName);
+        System.out.println("------------------------");
 
         Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
         Iterator<? extends GrantedAuthority> iterator = authorities.iterator();
@@ -69,10 +75,13 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
 
         response.addHeader("Authorization", "Bearer " + token);
 
-        String jsonToken = "{\"accessToken\" : \"" + token + "\"}";
+        String jsonResponse = "{\"username\": \"" + username + "\", \"name\": \"" + realName + "\", \"accessToken\": \"" + token + "\"}";
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+
         try {
             PrintWriter writer = response.getWriter();
-            writer.write(jsonToken);
+            writer.write(jsonResponse);
         }catch (IOException e){
             System.out.println(e);
         }

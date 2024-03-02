@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Update;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
 
 @Mapper
 public interface LocationMapper {
@@ -52,4 +53,13 @@ public interface LocationMapper {
         update location set state = '등록완료' where id = #{id}
     """)
     public int loadingCancel(String id);
+
+    //투표 목록 조회
+    @Select("SELECT v.user_id, u.name, l.title " +
+            "FROM location l " +
+            "INNER JOIN vote_list v ON l.id = v.location_id " +
+            "INNER JOIN user u ON v.user_id = u.user_id " + // 사용자 정보 가져오기
+            "WHERE DATE(v.date) = CURDATE() " + // 현재 날짜와 투표 날짜 비교
+            "ORDER BY l.title")
+    List<Map<String, String>> getLocationVoteCount();
 }

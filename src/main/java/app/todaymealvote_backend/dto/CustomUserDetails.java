@@ -20,7 +20,6 @@ public class CustomUserDetails implements UserDetails {
     public Collection<? extends GrantedAuthority> getAuthorities() {
         Collection<GrantedAuthority> collection = new ArrayList<>();
         collection.add(new GrantedAuthority() {
-
             @Override
             public String getAuthority() {
                 return userDTO.getRole();
@@ -38,7 +37,12 @@ public class CustomUserDetails implements UserDetails {
 
     @Override
     public String getUsername() {
+
         return userDTO.getUser_id();
+    }
+
+    public String getName(){
+        return userDTO.getName();
     }
 
     @Override

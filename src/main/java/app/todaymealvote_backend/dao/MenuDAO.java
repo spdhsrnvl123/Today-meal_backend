@@ -15,7 +15,6 @@ public class MenuDAO {
     public Object save(MenuDTO menuDTO){
         return menuMapper.save(menuDTO);
     }
-
     public List<MenuDTO> menuFindAll(String id){
         return menuMapper.menuFindAll(id);
     }

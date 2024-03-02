@@ -1,7 +1,9 @@
 package app.todaymealvote_backend.controller;
 import app.todaymealvote_backend.dto.UserDTO;
+import app.todaymealvote_backend.dto.VoteDTO;
 import app.todaymealvote_backend.service.LocationService;
 import app.todaymealvote_backend.service.MenuService;
+import app.todaymealvote_backend.service.VoteService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -18,6 +20,8 @@ public class MainController {
     LocationService locationService;
     @Autowired
     MenuService menuService;
+    @Autowired
+    VoteService voteService;
 
     //장소등록
     @PostMapping("/register")
@@ -34,11 +38,6 @@ public class MainController {
     public Object locationFindAll(HttpServletRequest request) {
         HttpSession session = request.getSession();
         String sessionId = session.getId();
-
-        System.out.println("Session ID: " + sessionId);
-
-        // 다른 작업 수행...
-
         return locationService.findAll();
     }
 
@@ -67,7 +66,6 @@ public class MainController {
     //각 장소 조회
     @GetMapping("/location/{id}")
     public Object locationFindEach(@PathVariable String id){
-        System.out.println(locationService.findOne(id));
         return locationService.findOne(id);
     }
 
@@ -80,8 +78,25 @@ public class MainController {
     //회원가입
     @PostMapping("/join")
     public int join(@RequestBody UserDTO userDTO){
-
         return userService.joinProcess(userDTO);
     }
 
+    //투표등록(최종완료)
+    @PostMapping("/vote")
+    public String vote(@RequestBody VoteDTO voteDTO){
+        System.out.println(voteDTO);
+        return voteService.vote(voteDTO);
+    }
+
+    //투표삭제(최종완료)
+    @DeleteMapping("/vote/{user_id}")
+    public String voteDel(@PathVariable String user_id){
+        return voteService.voteDel(user_id);
+    };
+
+    //투표조회(최종완료)
+    @GetMapping("/vote")
+    public Object getLocationVoteCount(){
+        return locationService.getLocationVoteCount();
+    }
 }

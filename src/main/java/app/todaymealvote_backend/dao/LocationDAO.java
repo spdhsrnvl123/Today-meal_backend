@@ -50,4 +50,8 @@ public class LocationDAO {
     public int loadingCancel(String id){
         return locationMapper.loadingCancel(id);
     }
+
+    public Object getLocationVoteCount() {
+        return locationMapper.getLocationVoteCount();
+    }
 }
