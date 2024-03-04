@@ -43,4 +43,7 @@ public class VoteDAO {
         }
     }
 
+    public Object voteUser(String user_id) {
+        return voteMapper.voteUser(user_id);
+    }
 }

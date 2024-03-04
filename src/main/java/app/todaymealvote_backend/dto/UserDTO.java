@@ -14,5 +14,4 @@ public class UserDTO {
     private Date create_date;
     private String state;
     private String role;
-
 }

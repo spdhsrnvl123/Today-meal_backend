@@ -99,4 +99,10 @@ public class MainController {
     public Object getLocationVoteCount(){
         return locationService.getLocationVoteCount();
     }
+
+    //내가 등록한 투표 조회
+    @GetMapping("/vote/{user_id}")
+    public Object voteUser(@PathVariable String user_id){
+        return voteService.voteUser(user_id);
+    };
 }

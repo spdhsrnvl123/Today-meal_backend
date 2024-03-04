@@ -32,4 +32,8 @@ public class VoteService {
     public String voteDel(String user_id){
         return voteDAO.voteDel(user_id);
     }
+
+    public Object voteUser(String user_id) {
+        return voteDAO.voteUser(user_id);
+    }
 }
