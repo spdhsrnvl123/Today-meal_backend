@@ -55,11 +55,12 @@ public interface LocationMapper {
     public int loadingCancel(String id);
 
     //투표 목록 조회
-    @Select("SELECT v.user_id, u.name, l.title " +
+    @Select("SELECT l.title, l.img, COUNT(v.location_id) as vote_count " +
             "FROM location l " +
             "INNER JOIN vote_list v ON l.id = v.location_id " +
             "INNER JOIN user u ON v.user_id = u.user_id " + // 사용자 정보 가져오기
             "WHERE DATE(v.date) = CURDATE() " + // 현재 날짜와 투표 날짜 비교
+            "GROUP BY l.title, l.img " + // title 별로 그룹화하여 각 위치의 투표 수를 세어줍니다.
             "ORDER BY l.title")
     List<Map<String, String>> getLocationVoteCount();
 }
