@@ -1,9 +1,7 @@
 package app.todaymealvote_backend.mapper;
 
 import app.todaymealvote_backend.dto.UserDTO;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
@@ -26,4 +24,15 @@ public interface UserMapper {
     // 로그인 아이디 정보에 따른 회원정보 뽑기
     @Select("select * from user where user_id=#{user_id}")
     public UserDTO infoId(String user_id);
+
+    @Delete("delete from user where user_id = #{user_id} and password=#{password}")
+    public int userLeave(Object userInfo);
+
+    @Update("""
+        update user
+        set password = #{newPassword} 
+        where password = #{oldPassword} 
+        and user_id = #{user_id}
+    """)
+    public int userChange(Object userInfo);
 }

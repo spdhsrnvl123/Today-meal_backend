@@ -35,4 +35,12 @@ public class UserService {
 
         return userDao.join(userDTO);
     }
+
+    public int userLeave(Object userInfo) {
+        return userDao.userLeave(userInfo);
+    }
+
+    public int userChange(Object userInfo){
+        return userDao.userChange(userInfo);
+    }
 }

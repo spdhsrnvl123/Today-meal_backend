@@ -7,7 +7,9 @@ import app.todaymealvote_backend.service.VoteService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
+import org.apache.ibatis.annotations.Update;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import app.todaymealvote_backend.service.UserService;
 
@@ -83,15 +85,16 @@ public class MainController {
 
     //투표등록(최종완료)
     @PostMapping("/vote")
-    public String vote(@RequestBody VoteDTO voteDTO){
-        System.out.println(voteDTO);
-        return voteService.vote(voteDTO);
+    public ResponseEntity<String> vote(@RequestBody VoteDTO voteDTO){
+        voteService.vote(voteDTO);
+        return ResponseEntity.ok("{\"message\": \"투표가 완료되었습니다.\"}");
     }
 
     //투표삭제(최종완료)
     @DeleteMapping("/vote/{user_id}")
-    public String voteDel(@PathVariable String user_id){
-        return voteService.voteDel(user_id);
+    public ResponseEntity<String> voteDel(@PathVariable String user_id){
+        voteService.voteDel(user_id);
+        return ResponseEntity.ok("{\"message\": \"삭제가 완료되었습니다.\"}");
     };
 
     //투표조회(최종완료)
@@ -105,4 +108,17 @@ public class MainController {
     public Object voteUser(@PathVariable String user_id){
         return voteService.voteUser(user_id);
     };
+
+    //회원탈퇴
+    @PostMapping("/user/cancel")
+    public int userLeave(@RequestBody Object userInfo){
+        return userService.userLeave(userInfo);
+    }
+
+    //비밀번호 변경
+    @PostMapping("/user/password")
+    public int userChange(@RequestBody Object userInfo){
+        System.out.println(userInfo);
+        return userService.userChange(userInfo);
+    }
 }

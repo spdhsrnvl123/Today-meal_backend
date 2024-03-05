@@ -79,7 +79,7 @@ public class SecurityConfig {
         //경로별 인가 작업
         http
                 .authorizeHttpRequests((auth) -> auth
-                        .requestMatchers("/login", "/", "/join", "/user","/duplication/*","/vote","/vote/*").permitAll()
+                        .requestMatchers("/login", "/", "/join", "/user","/duplication/*","/vote","/vote/*","/user/*").permitAll()
                         .requestMatchers("/admin").hasRole("USER")
                         .anyRequest().authenticated());
         //JWTFilter 등록

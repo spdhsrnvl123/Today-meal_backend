@@ -9,6 +9,9 @@ import java.util.List;
 @Repository
 public class UserDAO {
     @Autowired UserMapper userMapper;
+
+
+
     public List<UserDTO> userFindAll(){
         return userMapper.userFindAll();
     }
@@ -30,5 +33,15 @@ public class UserDAO {
 
     public Boolean userFindOne(String user_id){
         return userMapper.userFindOne(user_id);
+    }
+
+    //회원탈퇴
+    public int userLeave(Object userInfo) {
+        return userMapper.userLeave(userInfo);
+    }
+
+    // 비밀번호 변경
+    public int userChange(Object userInfo) {
+        return userMapper.userChange(userInfo);
     }
 }
