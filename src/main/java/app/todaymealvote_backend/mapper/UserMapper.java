@@ -25,9 +25,11 @@ public interface UserMapper {
     @Select("select * from user where user_id=#{user_id}")
     public UserDTO infoId(String user_id);
 
+    //회원탈퇴
     @Delete("delete from user where user_id = #{user_id} and password=#{password}")
     public int userLeave(Object userInfo);
 
+    //비밀번호 변경
     @Update("""
         update user
         set password = #{newPassword} 

@@ -32,6 +32,7 @@ public interface LocationMapper {
     @Select("select * from location where id=#{id}")
     public List<LocationDTO> findOne(String id);
 
+
     //장소 id값 일치 컴럼 수 조회
     @Select("select COUNT(*) from location where id=#{id}")
     public int idFindAll(String id);
