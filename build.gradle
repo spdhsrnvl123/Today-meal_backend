@@ -42,3 +42,16 @@ dependencies {
 tasks.named('test') {
 	useJUnitPlatform()
 }
+
+jar {
+	dependsOn configurations.runtimeClasspath
+	from {
+		configurations.runtimeClasspath.findAll { it.name.endsWith('jar') }.collect { zipTree(it) }
+	}
+
+	manifest {
+		attributes 'Main-Class': 'app.todaymealvote_backend.TodayMealVoteBackendApplication', 'Title': 'TEST', 'Version': 0.1
+	}
+	archiveBaseName.set("meal")
+	duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+}
